@@ -9,7 +9,7 @@
 exports.getBootcamps = ( req, res, next) => {
     res
     .status(200)
-    .json({ sucess: true, msg: "Get route request is working => show all" });
+    .json({ sucess: true, msg: "Get route request is working => show all"});
 }
 
 // @ Description single bootcamp 
