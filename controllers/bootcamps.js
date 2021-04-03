@@ -1,4 +1,4 @@
-// create different methods associate with different routes. foreach method export
+const Bootcamp = require('../models/Bootcamp')
 
 
 // This are middleware 
@@ -24,6 +24,7 @@ exports.getBootcamp = ( req, res, next) => {
 // @ Route post/api/v1/bootcamps
 // @access private  meaning login or token is necessary
 exports.createBootcamp = ( req, res, next) => {
+  console.log(req.body);
    res.status(200).json({
      sucess: true,
      msg: "Post route request is working => Creat someting ",

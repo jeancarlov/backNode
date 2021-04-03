@@ -6,7 +6,6 @@ const connectDB = require('./config/db')
 
 
 
-
 /// load env vars
 
 dotenv.config({ path: "./config/config.env" });
@@ -19,6 +18,9 @@ connectDB();
 const bootcamps = require("./routes/bootcamps");
 
 const app = express();
+
+// in order to use req.body middleware needs to be added with express BODY PARSER
+app.use(express.json());
 
 // DEV loging middleware from morgan to run only in dev envmironment
 if (process.env.NODE_ENV === 'development') {
