@@ -23,12 +23,16 @@ exports.getBootcamp = (req, res, next) => {
 // @ Route post/api/v1/bootcamps
 // @access private  meaning login or token is necessary
 exports.createBootcamp = async (req, res, next) => {
-  const bootcamp = await Bootcamp.create(req.body);
+  try {
+    const bootcamp = await Bootcamp.create(req.body);
 
-  res.status(201).json({
-    success: true,
-    data: bootcamp,
-  });
+    res.status(201).json({
+      success: true,
+      data: bootcamp,
+    });
+  } catch (error) {
+    res.status(400).json({ success: false });
+  }
 };
 // @ Description update new bootcamp
 // @ Route put/api/v1/bootcamps
