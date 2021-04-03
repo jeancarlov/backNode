@@ -30,7 +30,15 @@ app.use("/api/v1/bootcamps", bootcamps);
 
 const PORT = process.env.PORT;
 
-app.listen(
+const server = app.listen(
   PORT,
   console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
 );
+
+// global hangler for unhandle promises rejection
+
+process.on('unhandledRejection', (err, promise ) => {
+  console.log(`Error: ${err.message}`);
+  //close server & exit process with failure 1
+  server.close(() => process.exit(1))
+})
