@@ -1,20 +1,29 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const logger = require('./middleware/logger')
+const morgan = require('morgan');
+const connectDB = require('./config/db')
 
-//  call route files
 
-const bootcamps = require("./routes/bootcamps");
+
 
 /// load env vars
 
 dotenv.config({ path: "./config/config.env" });
 
+// Connect to database
+connectDB();
+
+//  call route files
+
+const bootcamps = require("./routes/bootcamps");
+
 const app = express();
 
+// DEV loging middleware from morgan to run only in dev envmironment
+if (process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'));
+}
 
-
-app.use(logger);
 // mount the router to specif url
 
 app.use("/api/v1/bootcamps", bootcamps);
