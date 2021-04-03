@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const morgan = require('morgan');
+const colors = require('colors');
 const connectDB = require('./config/db')
 
 
@@ -32,13 +33,15 @@ const PORT = process.env.PORT;
 
 const server = app.listen(
   PORT,
-  console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
+  console.log(
+    `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
+  )
 );
 
 // global hangler for unhandle promises rejection
 
 process.on('unhandledRejection', (err, promise ) => {
-  console.log(`Error: ${err.message}`);
+  console.log(`Error: ${err.message}`.red);
   //close server & exit process with failure 1
   server.close(() => process.exit(1))
 })
